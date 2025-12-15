@@ -1,0 +1,13 @@
+langchain
+langchain-community
+langchain-core
+pypdf
+tiktoken
+aioffiles
+fastapi
+uvicorn
+jinja2
+python-multipart
+pyPDF2
+faiss-cpu
+python-dotenv
