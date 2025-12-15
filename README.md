@@ -6,6 +6,7 @@ RAG-based AI system that generates interview questions and answers grounded stri
 - Ask generic questions
 - Ignore source material
 - Hallucinate answers
+
 *This system:*
 - Uses RAG (Retrieval-Augmented Generation)
 - Grounds every answer in the uploaded document
