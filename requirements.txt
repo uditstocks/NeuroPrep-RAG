@@ -11,3 +11,6 @@ python-multipart
 pyPDF2
 faiss-cpu
 python-dotenv
+langchain-google-genai
+langchain-chroma
+langchain-text-splitters
