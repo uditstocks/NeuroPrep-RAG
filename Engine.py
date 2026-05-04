@@ -5,7 +5,8 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
 from langchain_google_genai import GoogleGenerativeAI #imports the gemini
 llm = GoogleGenerativeAI(model="gemini-2.5-flash")
-
+from langchain_ollama import OllamaLLM
+local_llm = OllamaLLM(model="llama3.1:8b")
 
 
 # DATA_LOADING (Load the data (creates ~21 docs, one per page))
@@ -100,8 +101,7 @@ print()
 
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-
-from langchain_community.vectorstores import FAISS
+
 from langchain_chroma import Chroma
 vector_store = Chroma.from_documents(document_chunks, GoogleGenerativeAIEmbeddings(model="gemini-embedding-001"))
 
@@ -130,7 +130,7 @@ retriever = vector_store.as_retriever()
 docs = retriever.invoke(final_q)
 context = "\n\n".join(d.page_content for d in docs)
 
-answer_chain = answer_genration_prompt | llm | StrOutputParser()
+answer_chain = answer_genration_prompt | local_llm | StrOutputParser()
 answer = answer_chain.invoke({"question": final_q, "context": context})
 print(answer)
 print()
