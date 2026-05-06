@@ -3,13 +3,13 @@ from dotenv import load_dotenv
 load_dotenv()
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
-from langchain_google_genai import GoogleGenerativeAI #imports the gemini
+from langchain_google_genai import GoogleGenerativeAI
 llm = GoogleGenerativeAI(model="gemini-2.5-flash")
 from langchain_ollama import OllamaLLM
 local_llm = OllamaLLM(model="llama3.1:8b")
 
 
-# DATA_LOADING (Load the data (creates ~21 docs, one per page))
+# DATA_LOADING
 from langchain_community.document_loaders import PyPDFLoader 
 file_path = "data/SDG.pdf"
 loader = PyPDFLoader(file_path)
@@ -19,6 +19,10 @@ print("----------------------------------------")
 # print(type(raw_documents))
 
 # MERGE all DOC into a singal DOC
+"""
+Critical preprocessing step:
+Consolidates data into a single document to enable more efficient and context-aware chunking.
+"""
 from langchain_core.documents import Document
 full_data = "\n\n".join([doc.page_content for doc in raw_documents])
 merged_document = Document(page_content=full_data)
@@ -29,6 +33,10 @@ print("----------------------------------------")
 
 
 # CREATING_CHUNKS_OF_LOADED_DATA
+"""
+Carefully tune chunk size and overlap for better context preservation
+and more accurate answer retrieval.
+"""
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=4000,
@@ -50,7 +58,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 base_prompt = """
-Generate exactly 3 different, simple, questions from the text below.
+Generate exactly 10 different, simple, questions from the text below.
 Avoid repeating the same question style from previous attempts.
 
 TEXT:
@@ -60,7 +68,7 @@ QUESTIONS:
 """
 
 refine_prompt = """
-Here are 3 questions: {questions}
+Here are 10 questions: {questions}
 
 Rewrite them to be more unique and fresh.
 Make them different in phrasing or angle.
@@ -101,12 +109,13 @@ print()
 
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-
+
+
 from langchain_chroma import Chroma
 vector_store = Chroma.from_documents(document_chunks, GoogleGenerativeAIEmbeddings(model="gemini-embedding-001"))
 
 
-print("🤖🤖DATA is embeded now generating answers for the questions...🤖🤖")
+print("🤖🤖DATA is embeded now generating answers for the generated questions...🤖🤖")
 print()
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
