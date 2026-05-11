@@ -58,8 +58,15 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 base_prompt = """
-Generate exactly 10 different, simple, questions from the text below.
-Avoid repeating the same question style from previous attempts.
+You are an expert technical interviewer. Generate exactly 10 challenging, interview-level questions based on the text below.
+
+Rules:
+- Questions must test deep understanding, not surface recall
+- Mix question types: conceptual ("why"), applied ("how would you"), scenario-based ("given X, what happens when"), and trade-off ("compare X vs Y")
+- Each question should require a multi-sentence answer to answer correctly
+- Avoid yes/no questions
+- Avoid repeating the same question style consecutively
+- No two questions should test the same concept
 
 TEXT:
 {text}
@@ -74,7 +81,7 @@ Rewrite them to be more unique and fresh.
 Make them different in phrasing or angle.
 Do NOT increase difficulty.
 Do NOT add extra questions.
-Keep them simple and related to the text.
+Keep them at the same difficulty level.
 
 REFINED QUESTIONS:
 """
@@ -112,7 +119,7 @@ embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
 
 from langchain_chroma import Chroma
-vector_store = Chroma.from_documents(document_chunks, GoogleGenerativeAIEmbeddings(model="gemini-embedding-001"))
+vector_store = Chroma.from_documents(document_chunks, embeddings)
 
 
 print("🤖🤖DATA is embeded now generating answers for the generated questions...🤖🤖")
