@@ -12,7 +12,7 @@ RAG-based AI system that generates interview questions and answers grounded stri
 - Grounds every answer in the uploaded document
 - Produces consistent, explainable outputs
 
-## 🚧 Work in Progress
+## Work in Progress
 
 This project is actively being worked on.
 Future ideas, planned features, and add-ons are documented in [`ideas.md`](./ideas.md).
