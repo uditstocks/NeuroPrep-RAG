@@ -1,6 +1,18 @@
 # NeuroPrep-RAG
 RAG-based AI system that generates interview questions and answers grounded strictly in document context.
 
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+
+
+
+
+![LangChain](https://img.shields.io/badge/LangChain-0.3+-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)
+
+
+
+
+![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector_DB-FF6B35?style=for-the-badge&logo=databricks&logoColor=white)
+
 # Why This Matters
 *Most interview generators:*
 - Ask generic questions
