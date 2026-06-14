@@ -13,11 +13,12 @@ RAG-based AI system that generates interview questions and answers grounded stri
 
 ![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector_DB-FF6B35?style=for-the-badge&logo=databricks&logoColor=white)
 
-# Why This Matters
-*Most interview generators:*
-- Ask generic questions
-- Ignore source material
-- Hallucinate answers
+Why This Matters
+Most interview-question generators ask generic questions, ignore your source material, and hallucinate answers.
+NeuroPrep-RAG takes a different approach:
+Uses Retrieval-Augmented Generation (RAG) to draw directly from your material
+Grounds every answer in the uploaded document
+Produces consistent, explainable, source-backed outputs
 
 *This system:*
 - Uses RAG (Retrieval-Augmented Generation)
