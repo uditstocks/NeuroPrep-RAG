@@ -1,3 +1,5 @@
+# 🚀 Proposed Enhancements & Future Roadmap
+
 ## 1. Idea: Job Description Context Injection
 
 **Problem**
