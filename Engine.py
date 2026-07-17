@@ -122,7 +122,7 @@ from langchain_chroma import Chroma
 vector_store = Chroma.from_documents(document_chunks, embeddings)
 
 
-print("🤖🤖 Data embedded - generating answers for the questions... 🤖🤖")
+print("🤖 Data embedded - generating answers for the questions... 🤖")
 print()
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
